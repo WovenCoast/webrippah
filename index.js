@@ -1,22 +1,29 @@
 #!/usr/bin/env node
-'use strict';
+"use strict";
 
 const title = process.title;
 
-const chalk = require('chalk');
-const { util, cli } = require('./lib');
+const chalk = require("chalk");
+let text = `               _          _                   _     
+ __      _____| |__  _ __(_)_ __  _ __   __ _| |__
+ \\ \\ /\\ / / _ \\ '_ \\| '__| | '_ \\| '_ \\ / _\` | '_ \\
+  \\ V  V /  __/ |_) | |  | | |_) | |_) | (_| | | | |
+   \\_/\\_/ \\___|_.__/|_|  |_| .__/| .__/ \\__,_|_| |_|
+                           |_|   |_|
+`;
+const { util, cli } = require("./lib");
 cli.clearScreen();
-console.log(chalk.cyan`                                                    Created by ${chalk.greenBright("WovenCoast")}
-   ___ _ _ __ (_)_ __ ___   ___       ___  ___ _ __ __ _ _ __   ___ _ __ 
-  /  _\` | '_ \\| | '_ \` _ \\ / _ \\_____/ __|/ __| '__/ _\` | '_ \\ / _ \\ '__|
-  | (_| | | | | | | | | | |  __/_____\\__ \\ (__| | | (_| | |_) |  __/ |   
-  \\___,_|_| |_|_|_| |_| |_|\\___|     |___/\\___|_|  \\__,_| .__/ \\___|_|   
-                                                        |_|              `)
+console.log(
+  chalk.cyan`${`Created by ${chalk.greenBright("WovenCoast")}`.padStart(
+    69
+  )}\n${text}`
+);
 
-const main = require('./main');
-const cmdInput = require('meow')(`
+const main = require("./main");
+const cmdInput = require("meow")(
+  `
   Usage
-    $ anime [name]
+    $ webrippah [name]
   
   Options
     --reset, -r     (false)     Reset manifest 
@@ -29,21 +36,22 @@ const cmdInput = require('meow')(`
   {
     flags: {
       reset: {
-        type: 'boolean',
-        alias: 'r',
+        type: "boolean",
+        alias: "r",
       },
       throttle: {
-        type: 'string',
-        alias: 't'
+        type: "string",
+        alias: "t",
       },
       debug: {
-        type: 'boolean',
-        alias: 'd'
-      }
-    }
-  });
-cli.setTitle(`anime-scraper - ${process.cwd()}`);
-process.on('kill', () => {
+        type: "boolean",
+        alias: "d",
+      },
+    },
+  }
+);
+cli.setTitle(`webrippah - ${process.cwd()}`);
+process.on("kill", () => {
   cli.setTitle(title);
 });
 if (cmdInput.flags.debug) process.env.DEBUG = true;
